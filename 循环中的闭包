@@ -1,8 +1,8 @@
 #循环中的闭包
-
-        for(var i = 0; i < 10; i++) {
-            setTimeout(function() {
-                var m=i;
-                console.log(m);  
-            }, 1000);
-        }
+		for(var i = 0; i < 10; i++) {
+        setTimeout(function() {
+            var m=i;
+            console.log(m);  
+        }, 1000);
+    }
+        
