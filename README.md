@@ -27,12 +27,28 @@
     
     //一般对象
     ({}).toString();         //"[object,object]"
-    //数组
+    
+    //数组,相当于把数组的每一项的值分别toString后，对数据join(",")
     [1,{}].toString();       //"1,[object,object]"
-    //日期对象
+    
+    //日期对象,相关功能toLocaleString
     (new Date).toString();   //"Wed Apr 29 2015 22:35:29 GMT+0800 (中国标准时间)"
+    
     //正则表达式
     (new RegExp).toString();             //"/(?:)/"
     (new RegExp("string")).toString();   //"/string/"
     (new RegExp(/\s/)).toString();       //"/\s/"
     (/\s/).toString();                   //"/\s/"
+    
+    //函数对象
+    var fn=function(){};
+    fn.toString();   //"function (){}"
+    
+    //Error 没用用过
+    Error.toString(); //错误的文本
+    
+###关于String
+可以将所有类型转换成String，包括 null和undefined
+    
+    String(null);//"null"
+    
