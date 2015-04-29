@@ -6,3 +6,15 @@
             console.log(m);  
         }, 1000);
     }
+
+    //原本的想法是从1到10输出，结果是却是输出了10次10
+    
+按以下方式进行分解
+
+    var i;//全局变量
+    for(i = 0; i < 10; i++) {
+        setTimeout(function() {
+            var m=i;
+            console.log(m);  
+        }, 1000);
+    }
