@@ -1,4 +1,9 @@
-#循环中的闭包
+###循环中的闭包
     
-    for()
+    for(var i = 0; i < 10; i++) {
+        setTimeout(function() {
+            var m=i;
+            console.log(m);  
+        }, 1000);
+    }
         
