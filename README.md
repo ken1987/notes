@@ -1,5 +1,10 @@
 在js里面，几乎所有变量都能调用toString方法，除了null和undefined例外。
 
+###关于布尔值
+    
+    false.toString(); //"false"
+    true.toString(); //"true"
+
 ###关于数字
 
     //错误的用法
