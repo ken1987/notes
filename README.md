@@ -1,20 +1,29 @@
-在js里面，几乎所有变量都能调用toString方法，除了null和undefined例外。
+在js里面，几乎所有变量都能调用toString方法，除了null和undefined例外，而String把所有类型转换成字符串
 
-###关于布尔值
+
+##两者不同的地方
+
+###关于null和undefined
     
-    false.toString(); //"false"
-    true.toString(); //"true"
+    //错误的用法
+    null.toString();
+    undefined.toString();
+    
+    //正确的用法
+    String(null);      //"null"
+    String(undefined); //"undefined"
 
 ###关于数字
 
+使用toString，等效在转成字符串前调用了parseFloat方法
+
+    (1.0).toString(); //'1'
+    parseFloat(1.0);  //'1'
+    
     //错误的用法
     1.toString();
-  
-    //其他
-    var a=1;
-    a.toString(); //"1"
     
-    //数据格式转换，等效在转成字符串前调用了parseFloat方法
+    //数据格式转换，
     (1).toString(); //'1'
     (1.0).toString(); //'1'
     (1.1).toString(); //'1.1'
@@ -26,7 +35,21 @@
     //也可以设置了相应的进制数
     (3).toString(3); //'10'
     
+使用String对象，等效于与空字符串连接
+    
+    String(1.0);      //"1.0"
+    1.0+"";           //"1.0"
+    
+##使用后，获得相同的结果
+
+###关于数字
+ 
     NaN.toString();  //'NaN'
+
+###关于布尔值
+    
+    false.toString(); //"false"
+    true.toString(); //"true"
 
 ###关于对象
     
@@ -51,9 +74,4 @@
     
     //Error 没用用过
     Error.toString(); //错误的文本
-    
-###关于String
-可以将所有类型转换成String，包括 null和undefined
-    
-    String(null);//"null"
     
