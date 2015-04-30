@@ -1,5 +1,6 @@
-在js里面，几乎所有变量都能调用toString方法，除了null和undefined例外，而String把所有类型转换成字符串
+#String对象和toString方法
 
+在js里面，几乎所有变量都能调用toString方法，除了null和undefined例外，而String把所有类型转换成字符串
 
 ##两者不同的地方
 
