@@ -7,9 +7,16 @@
 2. name 属性仅对相同域名的 frame 可访问
 3. 可以支持非常长的 name 值（2MB）
 
+##流程
+1. 创建一个隐藏的iframe节点，目标指向跨域请求地址
+2. 等待请求页面加载完毕，此时window.name已经有了新值，但是跨域，不能访问window.name
+3. 接着，修改iframe的地址，指向同域代理页面（不需要有实际内容，空的节约流量）
+4. 等待新的页面加载完毕，此时已经是同域了，可以获取window.name的值了
+5. 最后，防止其他代码访问window.name，可以把iframe删除
+
 ##样例
 
-跨域地址：http://localshost:20000/test.html
+跨域请求地址：http://localshost:20000/test.html
 		
 		<script>window.name = "something"</script>
 
@@ -31,6 +38,10 @@
 	            }
 	        };
 	    </script>
+
+##总结
+
+过程和jsonp的过程很像，两次请求量，感觉还是有点怪怪的。
 
 ##参考资料
 
