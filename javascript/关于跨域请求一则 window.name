@@ -1,0 +1,37 @@
+关于跨域请求一则 window.name
+============================
+
+##基础
+
+1. name 在浏览器环境中是一个全局/window对象的属性，且当在 frame 中加载新页面时，name 的属性值依旧保持不变
+2. name 属性仅对相同域名的 frame 可访问
+3. 可以支持非常长的 name 值（2MB）
+
+##样例
+
+跨域地址：http://localshost:20000/test.html
+		
+		<script>window.name = "something"</script>
+
+主站代理请求：http://localshost:10000/proxy.html
+		
+		//空着就好了
+
+主站地址：http://localshost:10000/index.html
+
+        <iframe src="http://localhost:10000/test.html" style="display:none;"></iframe>
+	    <script>
+	        var i,ifr = document.getElementsByTagName("iframe")[0];
+	        ifr.onload = function() {
+	            if (i) {
+	                alert("main: " + ifr.contentWindow.name);
+	            } else {
+	                ifr.src = "/proxy.html";
+	                i = 1;
+	            }
+	        };
+	    </script>
+
+##参考资料
+
+1. http://www.planabc.net/2008/09/01/window_name_transport/
