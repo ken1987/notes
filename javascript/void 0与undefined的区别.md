@@ -1,12 +1,16 @@
 ###void 0 与 undefined区别
 
-##undefined问题
+##undefined
 
 undefined在JavaScript中并不属于保留字/关键字。
 
-在IE5.5~8中我们可以将其当作变量那样对其赋值
+在IE5.5~8中可以将其当作变量对其赋值
 
-在IE9+及其他现代浏览器中赋值给undefined将无效
+在IE9+及其他现代浏览器中赋值无效
+
+##void
+
+void作为一元运算符,对任何值都返回undefined
 
 ##性能比较
 
@@ -31,3 +35,6 @@ undefined在JavaScript中并不属于保留字/关键字。
 
     test()        //1606ms
     test("void")  //61ms
+
+##参考
+http://www.w3cfuns.com/article-5600007-1-1.html
