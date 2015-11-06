@@ -14,60 +14,104 @@ fis.config.set('settings.spriter.csssprites', {
 //参考：https://github.com/fex-team/fis-optimizer-uglify-js
 fis.config.set('settings.optimizer.uglify-js', {
     mangle: {
-        except: 'exports, module, require, define'//不需要混淆的关键字
+        except: 'exports, module, require, define' //不需要混淆的关键字
     },
-    compress:{
-        drop_console:true //自动删除console
+    compress: {
+        drop_console: true //自动删除console
     }
 });
 
-//不需要被构建的文件
-fis.set('project.ignore', [
-    '*.bat',
-    'fis-conf.js'
-]);
-
-/**
- * 开发阶段
- */
 fis
-    //开启插件
-    //参考：https://github.com/fex-team/fis3-postpackager-loader
-    .match('::package', {
-        postpackager: fis.plugin('loader') //同名依赖需要用到
-    })
+    .set('project.ignore', ['node_modules/**', '*.bat', 'fis-conf.js']) // 排除指定目录
+    // .hook('cmd')// 开启模块化包装cmd
     //异构less
     .match('*.less', {
         parser: fis.plugin('less'),
         rExt: '.css'
     })
-    //html tpl
-    .match('*.{html,tpl}', {
-        useMap: true //同名依赖需要用到
+    //开启插件
+    //参考：https://github.com/fex-team/fis3-postpackager-loader
+    .match('::package', {
+        postpackager: fis.plugin('loader') //同名依赖需要用到
+    });
+
+/**
+ * libs | components | pages 目录
+ */
+
+fis
+//images --> root/static/images
+    .match(/^\/(lib|component|page)s\/(.*\.(png|gif|jpg|jpeg|ico))$/, {
+        release: "/static/images/$1-$2"
     })
-    //image --> root/static/images
-    .match("(*.{png,jpg,jpeg,gif,ico})", {
-        release: '/static/images/$1'
+    //fonts --> root/static/fonts
+    .match(/^\/(lib|component|page)s\/(fonts\/.*)$/, {
+        release: "/static/$2"
+    });
+
+/**
+ * libs | components 目录
+ */
+
+fis
+//js --> root/static/js
+    .match(/^\/(libs|components\/.*\.js)$/, {
+        release: "/static/js/$1"
     })
-    //page --> root
-    .match('/page(/**)', {
-        release: '$1'
+    .match(/^\/(libs|components)\/(.*?)\/(\2[^\/]*\.js)$/, {
+        release: "/static/js/$1/$3"
     })
-    //components
-    .match("components/**", {
+    //css|less --> root/static/css
+    .match(/^\/(libs|components\/.*\.(css|less))$/, {
+        release: "/static/css/$1"
+    })
+    .match(/^\/(libs|components)\/(.*?)\/(\2[^\/]*\.(css|less))$/, {
+        release: "/static/css/$1/$3"
+    });
+
+/**
+ * page 目录
+ */
+
+fis
+//js --> root/static/js
+    .match(/^\/page\/(.*?)\/(\2[^\/]*\.js)$/, {
+        isMod: true,
+        release: "/static/js/$2"
+    })
+    //css|less --> root/static/css
+    .match(/^\/page\/(.*?)\/(\2[^\/]*\.(css|less))$/, {
+        release: "/static/css/$2"
+    })
+    //html --> root
+    .match(/^\/page\/(.*\.html)$/, {
+        useSameNameRequire: true, //开启同名依赖
+        useMap: true, //同名依赖需要用到
+        preprocessor: fis.plugin('rjy-template'), //自定义插件：动态加载模版
+        postprocessor: fis.plugin('rjy-template'), //自定义插件：动态加载模版
+        release: '/$1'
+    });
+
+/**
+ * components 目录
+ */
+
+fis
+    // .match(/components\/_\/.*/, {
+    //     release:false
+    // })
+    .match(/components\/.*/, {
+        isMod: true,
         useSameNameRequire: true //开启同名依赖
-    })
-    //components:js --> root/static/js/components
-    .match(/components\/(.*)\/\1.js/, {
-        release: '/static/js/components/$1.js' //同名发布
-    })
-    //components:less --> root/static/css/components
-    .match(/components(\/_)?\/(.*)\/\2.less/, {
-        release: '/static/css/components/$2.less' //同名发布
-    })
-    //components:image --> root/static/images
-    .match(/components(\/_)?\/(.*\.(png|jpg|jpeg|gif|ico))/, {
-        release: '/static/images/$2'
+    });
+
+/**
+ * config 目录
+ */
+
+fis
+    .match(/config\/.*/, {
+        release: false
     });
 
 /**
@@ -88,11 +132,11 @@ fis.media('prod')
     })
     //css、less
     .match('*.{css,html:css,tpl:css}', {
+        useSprite: true,
         optimizer: fis.plugin('clean-css')
     })
     //css、less：外部
     .match('*.{css,less}', {
-        useSprite: true,
         useHash: true
     })
     //css、less：外部components
