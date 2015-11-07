@@ -40,14 +40,11 @@ fis
  */
 
 fis
-//images --> root/static/images
-    .match(/^\/(lib|component|page)s\/(.*\.(png|gif|jpg|jpeg|ico))$/, {
-        release: "/static/images/$1-$2"
-    })
-    //fonts --> root/static/fonts
+//fonts --> root/static/fonts  
+//实际操作中，字体不应该出现重名问题，但是要尽量避免这个问题，所以规则还可以优化
     .match(/^\/(lib|component|page)s\/(fonts\/.*)$/, {
-        release: "/static/$2"
-    });
+    release: "/static/$2"
+});
 
 /**
  * libs | components 目录
@@ -58,38 +55,21 @@ fis
     .match(/^\/(libs|components\/.*\.js)$/, {
         release: "/static/js/$1"
     })
+    //同名js产出与同名目录同级
     .match(/^\/(libs|components)\/(.*?)\/(\2[^\/]*\.js)$/, {
         release: "/static/js/$1/$3"
     })
-    //css|less --> root/static/css
-    .match(/^\/(libs|components\/.*\.(css|less))$/, {
+    //css|less|sass|scss --> root/static/css|sass|scss
+    .match(/^\/(libs|components\/.*\.(css|less|sass|scss))$/, {
         release: "/static/css/$1"
     })
-    .match(/^\/(libs|components)\/(.*?)\/(\2[^\/]*\.(css|less))$/, {
+    //同名样式产出与同名目录同级
+    .match(/^\/(libs|components)\/(.*?)\/(\2[^\/]*\.(css|less|sass|scss))$/, {
         release: "/static/css/$1/$3"
-    });
-
-/**
- * page 目录
- */
-
-fis
-//js --> root/static/js
-    .match(/^\/page\/(.*?)\/(\2[^\/]*\.js)$/, {
-        isMod: true,
-        release: "/static/js/$2"
     })
-    //css|less --> root/static/css
-    .match(/^\/page\/(.*?)\/(\2[^\/]*\.(css|less))$/, {
-        release: "/static/css/$2"
-    })
-    //html --> root
-    .match(/^\/page\/(.*\.html)$/, {
-        useSameNameRequire: true, //开启同名依赖
-        useMap: true, //同名依赖需要用到
-        preprocessor: fis.plugin('rjy-template'), //自定义插件：动态加载模版
-        postprocessor: fis.plugin('rjy-template'), //自定义插件：动态加载模版
-        release: '/$1'
+    //images --> root/static/images
+    .match(/^\/(lib|component)s\/images\/(.*\.(png|gif|jpg|jpeg|ico))$/, {
+        release: "/static/images/$1-$2"
     });
 
 /**
@@ -97,12 +77,39 @@ fis
  */
 
 fis
-    // .match(/components\/_\/.*/, {
-    //     release:false
-    // })
+// .match(/components\/_\/.*/, {
+//     release:false
+// })
     .match(/components\/.*/, {
+    isMod: true,
+    useSameNameRequire: true //开启同名依赖
+});
+
+/**
+ * pages 目录
+ */
+
+fis
+//js --> root/static/js
+    .match(/^\/pages\/(.*\.js)$/, {
         isMod: true,
-        useSameNameRequire: true //开启同名依赖
+        release: "/static/js/$1"
+    })
+    //css|less|sass|scss --> root/static/css|sass|scss
+    .match(/^\/pages\/(.*\.(css|less|sass|scss))$/, {
+        release: "/static/css/$1"
+    })
+    //html --> root
+    .match(/^\/pages\/(.*\.html)$/, {
+        useSameNameRequire: true, //开启同名依赖
+        useMap: true, //同名依赖需要用到
+        preprocessor: fis.plugin('rjy-template'), //自定义插件：动态加载模版
+        postprocessor: fis.plugin('rjy-template'), //自定义插件：动态加载模版
+        release: '/$1'
+    })
+    //images --> root/static/images
+    .match(/^\/pages\/(.*)\/images\/(.*\.(png|gif|jpg|jpeg|ico))$/, {
+        release: "/static/images/$1/$2"
     });
 
 /**
@@ -110,7 +117,7 @@ fis
  */
 
 fis
-    .match(/config\/.*/, {
+    .match(/^config\/.*/, {
         release: false
     });
 
