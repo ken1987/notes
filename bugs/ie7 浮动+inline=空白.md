@@ -4,6 +4,8 @@
 
 此时父元素不能自适应子元素内容的宽度，导致父容器出现宽度被意外撑大。
 
+![bug](images/bug.png)
+
 ````html
 <div style="float:left;border:1px solid blue;background:white;">
 		<input type="text" style="background:red;">
