@@ -1,6 +1,6 @@
 #XMLHttpRequest status = 0
 
-在做ajax异常分析时，遇到几种场景,导致的结果status为0
+在做ajax异常分析时，遇到几种场景,导致返回状态码status为0
 
 ##场景1：跨域访问
 
