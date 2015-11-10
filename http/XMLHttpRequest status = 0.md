@@ -152,9 +152,11 @@ xhr.abort();
 
 >The status attribute must return the result of running these steps:
 >*status的值一定会返回运行这些步骤的结果*。
-1. > If the state is UNSENT or OPENED, return 0.*如果状态是UNSENT或者OPENED，返回0*
-> 2. If the error flag is set, return 0.*如果错误标签被设置，返回0*
-> 3. Return the HTTP status code.*返回HTTP状态码*
+
+>
+1. If the state is UNSENT or OPENED, return 0.*如果状态是UNSENT或者OPENED，返回0*
+2. If the error flag is set, return 0.*如果错误标签被设置，返回0*
+3. Return the HTTP status code.*返回HTTP状态码*
 
 ##参考
 
