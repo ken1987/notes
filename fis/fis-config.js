@@ -36,22 +36,16 @@ fis
     });
 
 /**
- * libs | components | pages 目录
+ * libs | components 目录
  */
 
 fis
 //fonts --> root/static/fonts  
 //实际操作中，字体不应该出现重名问题，但是要尽量避免这个问题，所以规则还可以优化
-    .match(/^\/(lib|component|page)s\/(fonts\/.*)$/, {
-    release: "/static/$2"
-});
-
-/**
- * libs | components 目录
- */
-
-fis
-//js --> root/static/js
+    .match(/^\/(lib|component)s\/(fonts\/.*)$/, {
+        release: "/static/$2"
+    })
+    //js --> root/static/js
     .match(/^\/(libs|components\/.*\.js)$/, {
         release: "/static/js/$1"
     })
@@ -90,26 +84,12 @@ fis
  */
 
 fis
-//js --> root/static/js
-    .match(/^\/pages\/(.*\.js)$/, {
-        isMod: true,
-        release: "/static/js/$1"
-    })
-    //css|less|sass|scss --> root/static/css|sass|scss
-    .match(/^\/pages\/(.*\.(css|less|sass|scss))$/, {
-        release: "/static/css/$1"
-    })
-    //html --> root
-    .match(/^\/pages\/(.*\.html)$/, {
-        useSameNameRequire: true, //开启同名依赖
+//pages --> root
+    .match(/^\/pages\/(.*\.(html|tpl))$/, {
         useMap: true, //同名依赖需要用到
         preprocessor: fis.plugin('rjy-template'), //自定义插件：动态加载模版
         postprocessor: fis.plugin('rjy-template'), //自定义插件：动态加载模版
         release: '/$1'
-    })
-    //images --> root/static/images
-    .match(/^\/pages\/(.*)\/images\/(.*\.(png|gif|jpg|jpeg|ico))$/, {
-        release: "/static/images/$1/$2"
     });
 
 /**
