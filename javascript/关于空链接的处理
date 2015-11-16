@@ -1,0 +1,56 @@
+#关于空链接的处理
+
+对于空链接，我一直以来都不写href属性，简单省事也没有发现什么不妥。
+
+但是最近看别人代码的时候经常看到这种写法`<a href="javascript:void(0);">` ，逛了下主流网站，发现基本都这样处理的。
+
+于是，有些疑惑，为什么如此大费周章，网上找了点资料深入了解下。
+
+##相关写法
+
+````html
+
+<a>写法1</a>
+<a href="">写法2</a>
+<a href="#">写法3</a>
+<a href="##">写法4</a>
+<a href="###">写法5</a>
+<a href="javascript:void(0);">写法6</a>
+<a href="javascript:;">写法7</a>
+
+````
+##相关问题
+
+###拥有href属性
+
+1. 可以获得焦点（可以通过tab按键或者鼠标点击访问到），拥有:focus样式
+2. 拥有:link样式
+3. 拥有默认的cursor:pointer效果，当然也可以通过手动设置此样式
+
+###ie6 bug
+
+在IE6下面，如果方案6和方案7被未加分号，那么他们被点击后，IE6会使得页面中的gif暂停，并且触发onbeforeunload事件，IE6认作这个页面有了重定向，并abort之后所有的请求。
+
+###锚点
+
+通过添加锚点的链接被点击后，地址栏会被修改、产生历史记录、触发hashchange事件
+
+###seo
+
+空链接影响排名，具体影响还需要再深入了解下
+
+###禁用了js
+
+如果禁用了js，写法6和7就失效了
+
+##综合观点
+
+1. 不乱用a标签，在相关的语义化场景下使用。
+2. 较为简单通用的方案：`href="javascript:;"`。
+3. 其它方案：将 javascript:、 #、 ### 替换成真实网址，并取消 <a> 的默认点击事件，return false 或 event.preventDefault，如果JS失效了该链接虽功能上打了些折扣，但并没有彻底失效，做到了“平稳退化”
+
+##参考网站
+
+1. [<a href="javascript:void(0)">这样写为什么不好?](http://segmentfault.com/q/1010000000339082)
+2. [无障碍阅读](http://www.zhangxinxu.com/wordpress/2012/03/wai-aria-%E6%97%A0%E9%9A%9C%E7%A2%8D%E9%98%85%E8%AF%BB/)
+3. [css伪类](http://www.w3school.com.cn/css/css_pseudo_classes.asp)
