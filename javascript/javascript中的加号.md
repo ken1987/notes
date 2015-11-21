@@ -1,6 +1,3 @@
-
-[TOC]
-
 #javascript中的加号
 
 
