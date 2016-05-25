@@ -33,9 +33,9 @@
 如例子中2、4行那样，作为二元运算符时，则具有二义性，是执行加法运算，还是字符连接呢？
 
 大致过程如下：
->1. 将左右操作数*转换原始类型*
->2. 如果转换后的操作数包含String类型，则将他们都转换成String类型，执行字符连接。
->3. 否则，都转换成Number类型，进行加法运算。
+1. 将左右操作数*转换原始类型*
+2. 如果转换后的操作数包含String类型，则将他们都转换成String类型，执行字符连接。
+3. 否则，都转换成Number类型，进行加法运算。
 
 例子`1 + null`中，1是原始类型Number，null是原始类型Null，因此执行1和3。
 
@@ -60,7 +60,8 @@
 
 ##转换原始类型的实现过程
 
-没找到PreferredType的解释，大致可认为Object转换成原始类型的首选类型是String。
+1. 执行valueOf方法
+2. 如果上一步转换后的值不是原始型，执行toString方法
 
 参考：[PreferredType](http://www.ecma-international.org/ecma-262/6.0/#sec-toprimitive)
 
