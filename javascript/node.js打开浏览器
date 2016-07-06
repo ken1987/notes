@@ -1,0 +1,10 @@
+# node.js打开浏览器
+
+````
+var c = require('child_process')
+c.exec("start http://www.baidu.com")
+````
+
+## 参考
+[node.js打开浏览器](http://www.cnblogs.com/rubylouvre/archive/2013/01/10/2854040.html)
+[nightmarejs](http://www.nightmarejs.org/)
