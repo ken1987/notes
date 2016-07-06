@@ -1,0 +1,15 @@
+# NODE运行时环境变量配置
+
+## shell
+
+```
+NODE_ENV=development node server.js
+```
+
+## cmd
+
+```
+set NODE_ENV=development
+
+node server.js
+```
