@@ -1,0 +1,9 @@
+# webpack中的hash和chunkhash
+
+## hash
+表示每次编译产生的一个hash值
+
+唯一性和配置文件，入口文件及其依赖的文件是否变化对应
+
+## chunkhash
+表示每个入口文件的hash值，目前只发现能在output属性中使用
