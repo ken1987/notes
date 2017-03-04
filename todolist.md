@@ -19,6 +19,7 @@
     * [ ] 附录
 * [ ] [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 * [ ] Javascript 权威指南
+* [ ] HTTP 权威指南
 * [ ] Node API
 * [ ] BOM API
 * [ ] DOM API
