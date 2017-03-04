@@ -1,4 +1,4 @@
-[x] *  [ECMAScript 5.1](http://yanhaijing.com/es5)
+*[x]   [ECMAScript 5.1](http://yanhaijing.com/es5)
       * 范围
          * 一致性
 	* 参考文献
@@ -16,5 +16,5 @@
    * 标准 ECMAScript 内置对象
    * 错误
    * 附录
-* Node API
+*[ ] Node API
 
