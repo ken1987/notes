@@ -1,8 +1,8 @@
 # ECMAScript 5.1 学习笔记 1
 
-##  8.12.8 `[[DefaultValue]] (hint)`
+## 8.12 Algorithms for Object Internal Methods
 
-`[[DefaultValue]]` 是对象内部方法的算法
+## 8.12.8 `[[DefaultValue]] (hint)`
 
 1. 当 hint String
   * 令 toString 为用参数 "toString" 调用对象 O 的 [[Get]] 内部方法的结果。
