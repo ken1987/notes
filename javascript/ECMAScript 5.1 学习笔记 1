@@ -2,7 +2,9 @@
 
 ##  8.12.8 [[DefaultValue]] (hint)
 
-* 如果 hint 是字符串
+[[DefaultValue]] 是对象内部方法的算法
+
+* 1. 当 hint 希望返回 String 类型
   * 令 toString 为用参数 "toString" 调用对象 O 的 [[Get]] 内部方法的结果。
   * 如果 IsCallable(toString) 是 true，则
     * 令 str 为用 O 作为 this 值，空参数列表调用 toString 的 [[Call]] 内部方法的结果。
@@ -13,7 +15,7 @@
     * 如果 val 是原始值，返回 val。
   * 抛出一个 TypeError 异常。
   
-* 如果 hint 是数值
+* 2. 当 hint 希望返回 Number 类型
   * 令 valueOf 为用参数 "valueOf" 调用对象 O 的 [[Get]] 内部方法的结果。
   * 如果 IsCallable(valueOf) 是 true，则
     * 令 val 为用 O 作为 this 值，空参数列表调用 valueOf 的 [[Call]] 内部方法的结果。
@@ -24,13 +26,13 @@
     * 如果 str 是原始值，返回 str。
   * 抛出一个 TypeError 异常。
 
-* 如果 O 是 Date 对象
-  * 把 hint 当作字符串步骤解析
-  * 否则，当作数字步骤解析
+* 当 no hint
+  * 当 O 是 Date 类型，按步骤 1 处理
+  * 否则，按步骤 2 处理
 
 ## 9.1 ToPrimitive
 
-ToPrimitive 运算符接受一个值，和一个可选的 期望类型 作参数。ToPrimitive 运算符把其值参数转换为非对象类型。
+ToPrimitive(input, PreferredType) => non-Object
 
-* 输入非对象类型，返回非其本身
-* 输入对象类型，执行  [[DefaultValue]] (hint)
+* input 类型为 non-Object，返回 input
+* input 类型为 object，返回 [[DefaultValue]] (PreferredType)
