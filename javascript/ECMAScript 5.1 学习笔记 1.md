@@ -35,4 +35,4 @@
 ToPrimitive(input, PreferredType) => non-Object
 
 * input 类型为 non-Object，返回 input
-* input 类型为 object，返回 [[DefaultValue]] (PreferredType)
+* input 类型为 object，返回 `[[DefaultValue]] (PreferredType)`
