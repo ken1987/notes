@@ -1,6 +1,6 @@
 # ECMAScript 5.1 学习笔记 1
 
-##  8.12.8 [[DefaultValue]] (hint)
+##  8.12.8 `[[DefaultValue]] (hint)`
 
 `[[DefaultValue]]` 是对象内部方法的算法
 
