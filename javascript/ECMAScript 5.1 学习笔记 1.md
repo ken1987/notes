@@ -4,7 +4,7 @@
 
 `[[DefaultValue]]` 是对象内部方法的算法
 
-1. 当 hint 希望返回 String 类型
+1. 当 hint String
   * 令 toString 为用参数 "toString" 调用对象 O 的 [[Get]] 内部方法的结果。
   * 如果 IsCallable(toString) 是 true，则
     * 令 str 为用 O 作为 this 值，空参数列表调用 toString 的 [[Call]] 内部方法的结果。
@@ -15,7 +15,7 @@
     * 如果 val 是原始值，返回 val。
   * 抛出一个 TypeError 异常。
   
-2. 当 hint 希望返回 Number 类型
+2. 当 hint Number
   * 令 valueOf 为用参数 "valueOf" 调用对象 O 的 [[Get]] 内部方法的结果。
   * 如果 IsCallable(valueOf) 是 true，则
     * 令 val 为用 O 作为 this 值，空参数列表调用 valueOf 的 [[Call]] 内部方法的结果。
@@ -35,7 +35,7 @@
 ToPrimitive(input, PreferredType) => non-Object
 
 * input 类型为 non-Object，返回 input
-* input 类型为 object，返回 `[[DefaultValue]] (PreferredType)`
+* input 类型为 object，返回 `[[DefaultValue]] (hint PreferredType)`
 
 ## 9.3 ToNumber
 
