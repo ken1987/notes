@@ -1,8 +1,8 @@
 # ECMAScript 5.1 学习笔记 1
 
-##  `8.12.8 [[DefaultValue]] (hint)`
+##  8.12.8 [[DefaultValue]] (hint)
 
-[[DefaultValue]] 是对象内部方法的算法
+`[[DefaultValue]]` 是对象内部方法的算法
 
 1. 当 hint 希望返回 String 类型
   * 令 toString 为用参数 "toString" 调用对象 O 的 [[Get]] 内部方法的结果。
@@ -30,9 +30,15 @@
   * 当 O 是 Date 类型，按步骤 1 处理
   * 否则，按步骤 2 处理
 
-## `9.1 ToPrimitive`
+## 9.1 ToPrimitive
 
 ToPrimitive(input, PreferredType) => non-Object
 
 * input 类型为 non-Object，返回 input
 * input 类型为 object，返回 `[[DefaultValue]] (PreferredType)`
+
+## 9.3 ToNumber
+
+Object => Number
+* Let primValue be ToPrimitive(input argument, hint Number).
+* Return ToNumber(primValue).
