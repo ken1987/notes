@@ -10,14 +10,14 @@
     * [x] 类型
     * [x] 类型转换与测试
     * [x] 可执行代码与执行环境
-    * [ ] 表达式
-    * [ ] 语句
+    * [x] 表达式
+    * [x] 语句
     * [ ] 函数定义
     * [ ] 程序
     * [ ] 标准 ECMAScript 内置对象
     * [ ] 错误
     * [ ] 附录
-* [ ] [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
+* [x] [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 * [ ] Javascript 权威指南
 * [ ] HTTP 权威指南
 * [ ] Node API
